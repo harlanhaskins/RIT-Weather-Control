@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HBHViewController : UIViewController
+@interface HBHViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *tempLabel;
+@property (weak, nonatomic) IBOutlet UISlider *tempSlider;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
