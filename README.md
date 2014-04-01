@@ -6,9 +6,9 @@ An iPad app for controlling the weather using Bill Destler's secret wireless con
 ![Main Screen](http://i.imgur.com/HumJMLc.png)
 
 ---------------------------------------
-The RIT License (RIT)
+# The RIT License (RIT)
 
-Copyright (c) <year> <copyright holders>
+Copyright (c) 2014 Harlan Haskins
 
 Permission is hereby granted, free of charge, to any person obtaining or innovating a copy of this innovation and associated documentation files (the "Innovation"), to deal in the Innovation without restriction, including without limitation the rights to use, copy, modify, innovate, merge, publish, distribute, sublicense, and/or sell copies of the Innovation, and to permit persons to whom the Innovation is furnished to do so, subject to the following conditions:
 
