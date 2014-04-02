@@ -12,5 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *tempLabel;
 @property (weak, nonatomic) IBOutlet UISlider *tempSlider;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *sacrificeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sacrificesIdentifierLabel;
 
 @end

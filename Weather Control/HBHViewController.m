@@ -29,6 +29,7 @@
     [super viewDidLoad];
     self.items = @[@"Overcast", @"Rain", @"Snow", @"Sleet", @"Gale Force Winds", @"Apocalypse", @"Hoth", @"Heat Wave", @"Sun", @"Second Winter", @"San Diego"];
     self.selectedIndex = 0;
+    [self setSacrifices];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 - (IBAction)sliderChanged:(UISlider*)sender {
@@ -62,9 +63,19 @@
     return cell;
 }
 
+- (void) setSacrifices {
+    NSInteger hash = [self.items[self.selectedIndex] hash];
+    NSInteger sacrifices = hash % (self.items.count * 2);
+    self.sacrificeLabel.text = [NSString stringWithFormat:@"%li", (long)sacrifices];
+    
+    NSString *sacrificesText = sacrifices == 1 ? @"sacrifice" : @"sacrifices";
+    self.sacrificesIdentifierLabel.text = [sacrificesText stringByAppendingString:@" required"];
+}
+
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedIndex = indexPath.row;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self setSacrifices];
     [self.tableView reloadData];
 }
 
