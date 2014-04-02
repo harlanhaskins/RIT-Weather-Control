@@ -13,6 +13,9 @@
 @property (nonatomic) NSArray* items;
 @property (nonatomic) NSInteger selectedIndex;
 
+@property (nonatomic) NSInteger temperature;
+@property (nonatomic) NSInteger sacrifices;
+
 @end
 
 @implementation HBHViewController
@@ -27,14 +30,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.items = @[@"Overcast", @"Rain", @"Snow", @"Sleet", @"Gale Force Winds", @"Apocalypse", @"Hoth", @"Heat Wave", @"Sun", @"Second Winter", @"San Diego"];
+    self.items = @[@"Overcast", @"Rain", @"Snow", @"Sleet", @"Gale Force Winds", @"Second Winter", @"Hoth", @"Heat Wave", @"Apocalypse", @"Sun", @"San Diego"];
     self.selectedIndex = 0;
-    [self setSacrifices];
+    [self sliderChanged:self.tempSlider];
+    
 	// Do any additional setup after loading the view, typically from a nib.
 }
+
 - (IBAction)sliderChanged:(UISlider*)sender {
-    NSInteger temp = (150 * sender.value) - 75;
-    self.tempLabel.text = [NSString stringWithFormat:@"%li°", (long)temp];
+    self.temperature = sender.value;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -53,7 +57,7 @@
     cell.textLabel.text = self.items[indexPath.row];
     
     if (indexPath.row ==self.selectedIndex ||
-        indexPath.row == [self.items indexOfObject:@"Gale Force Winds"]) {
+        [self isGaleForceWindsIndex:indexPath.row]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else {
@@ -63,19 +67,57 @@
     return cell;
 }
 
-- (void) setSacrifices {
-    NSInteger hash = [self.items[self.selectedIndex] hash];
-    NSInteger sacrifices = hash % (self.items.count * 2);
-    self.sacrificeLabel.text = [NSString stringWithFormat:@"%li", (long)sacrifices];
+- (void) updateSacrifices {
+    self.sacrifices = [self sacrificeCountForCurrentSelections];
+}
+
+- (NSInteger) sacrificeCountForCurrentSelections {
+    BOOL shouldBeZero = (self.temperature < 0) || [self galeForceWindsIsSelected];
+    if (shouldBeZero) {
+        return 0;
+    }
     
-    NSString *sacrificesText = sacrifices == 1 ? @"sacrifice" : @"sacrifices";
+    NSInteger total = ((self.selectedIndex * 3) + (self.temperature / 10));
+    total *=  (self.temperature / self.tempSlider.maximumValue);
+    
+    return total;
+}
+
+- (BOOL) isGaleForceWindsIndex:(NSInteger)index {
+    return index == [self.items indexOfObject:@"Gale Force Winds"];
+}
+
+- (BOOL) galeForceWindsIsSelected {
+    return [self isGaleForceWindsIndex:self.selectedIndex];
+}
+
+- (void) setSacrifices:(NSInteger)sacrifices {
+    _sacrifices = sacrifices;
+    [self updateSacrificeLabel];
+}
+
+- (void) setTemperature:(NSInteger)temperature {
+    _temperature = temperature;
+    [self updateTemperatureLabel];
+    [self updateSacrifices];
+}
+
+- (void) updateTemperatureLabel {
+    self.tempLabel.text = [NSString stringWithFormat:@"%li°", (long)self.temperature];
+}
+
+- (void) updateSacrificeLabel {
+    self.sacrificeLabel.text = [NSString stringWithFormat:@"%li", (long)self.sacrifices];
+    
+    NSString *sacrificesText = self.sacrifices == 1 ? @"sacrifice" : @"sacrifices";
     self.sacrificesIdentifierLabel.text = [sacrificesText stringByAppendingString:@" required"];
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.selectedIndex = indexPath.row;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self setSacrifices];
+    
+    self.selectedIndex = indexPath.row;
+    [self updateSacrifices];
     [self.tableView reloadData];
 }
 
