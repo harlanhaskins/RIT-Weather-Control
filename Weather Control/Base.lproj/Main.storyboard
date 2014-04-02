@@ -45,13 +45,13 @@
                                 </connections>
                             </slider>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="temperature" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fd-sE-14x">
-                                <rect key="frame" x="342" y="473" width="85" height="21"/>
+                                <rect key="frame" x="342" y="459" width="85" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="p4z-Yv-nBV">
-                                <rect key="frame" x="224" y="508" width="320" height="400"/>
+                                <rect key="frame" x="224" y="497" width="320" height="400"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -64,13 +64,13 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJE-7r-PIG">
-                                <rect key="frame" x="335" y="957" width="99" height="30"/>
+                                <rect key="frame" x="289" y="927" width="190" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="99" id="YoN-5Z-aZO"/>
+                                    <constraint firstAttribute="width" constant="190" id="YoN-5Z-aZO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <state key="normal" title="Send">
+                                <state key="normal" title="Make It So">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -82,11 +82,11 @@
                             <constraint firstItem="FzX-Hh-b0B" firstAttribute="top" secondItem="rtS-mB-2Yx" secondAttribute="bottom" constant="8" id="86h-O3-v2C"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="rtS-mB-2Yx" secondAttribute="bottom" constant="604" id="Mgu-hJ-TjS"/>
                             <constraint firstAttribute="trailing" secondItem="rtS-mB-2Yx" secondAttribute="trailing" constant="34" id="N0n-XF-fth"/>
-                            <constraint firstItem="cJE-7r-PIG" firstAttribute="top" secondItem="p4z-Yv-nBV" secondAttribute="bottom" constant="49" id="RSE-5n-3Re"/>
-                            <constraint firstItem="p4z-Yv-nBV" firstAttribute="top" secondItem="9fd-sE-14x" secondAttribute="bottom" constant="14" id="Z3M-C3-Wjg"/>
+                            <constraint firstItem="cJE-7r-PIG" firstAttribute="top" secondItem="p4z-Yv-nBV" secondAttribute="bottom" constant="30" id="RSE-5n-3Re"/>
                             <constraint firstAttribute="trailing" secondItem="FzX-Hh-b0B" secondAttribute="trailing" constant="54" id="ZME-cH-jcN"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="p4z-Yv-nBV" secondAttribute="bottom" constant="116" id="cXy-Ax-W33"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="p4z-Yv-nBV" secondAttribute="bottom" constant="127" id="cXy-Ax-W33"/>
                             <constraint firstItem="rtS-mB-2Yx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="34" id="gfg-ab-cuS"/>
+                            <constraint firstItem="9fd-sE-14x" firstAttribute="top" secondItem="FzX-Hh-b0B" secondAttribute="bottom" constant="1" id="iE4-dU-Fue"/>
                             <constraint firstItem="rtS-mB-2Yx" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-3" id="phg-bf-B2i"/>
                             <constraint firstItem="FzX-Hh-b0B" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="rLT-dn-oej"/>
                             <constraint firstItem="p4z-Yv-nBV" firstAttribute="centerX" secondItem="9fd-sE-14x" secondAttribute="centerX" id="spi-yA-vRe"/>

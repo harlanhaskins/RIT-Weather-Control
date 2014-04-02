@@ -27,7 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.items = @[@"Overcast", @"Rain", @"Snow", @"Sleet", @"Apocalypse", @"Heat Wave", @"Sun", @"Spring Snow", @"San Diego"];
+    self.items = @[@"Overcast", @"Rain", @"Snow", @"Sleet", @"Gale Force Winds", @"Apocalypse", @"Hoth", @"Heat Wave", @"Sun", @"Second Winter", @"San Diego"];
     self.selectedIndex = 0;
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -50,7 +50,14 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
     cell.textLabel.text = self.items[indexPath.row];
-    cell.accessoryType = (self.selectedIndex == indexPath.row) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    
+    if (indexPath.row ==self.selectedIndex ||
+        indexPath.row == [self.items indexOfObject:@"Gale Force Winds"]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     
     return cell;
 }
