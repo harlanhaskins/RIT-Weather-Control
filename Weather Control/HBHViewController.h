@@ -10,7 +10,10 @@
 
 @interface HBHViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *tempLabel;
+@property (weak, nonatomic) IBOutlet UILabel *windLabel;
+@property (weak, nonatomic) IBOutlet UILabel *windChillLabel;
 @property (weak, nonatomic) IBOutlet UISlider *tempSlider;
+@property (weak, nonatomic) IBOutlet UISlider *windSlider;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *sacrificeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sacrificesIdentifierLabel;

@@ -7,6 +7,7 @@
 //
 
 #import "HBHViewController.h"
+#import <math.h>
 
 @interface HBHViewController ()
 
@@ -14,6 +15,7 @@
 @property (nonatomic) NSInteger selectedIndex;
 
 @property (nonatomic) NSInteger temperature;
+@property (nonatomic) NSInteger wind;
 @property (nonatomic) NSInteger sacrifices;
 
 @end
@@ -32,13 +34,18 @@
     [super viewDidLoad];
     self.items = @[@"Overcast", @"Rain", @"Snow", @"Sleet", @"Gale Force Winds", @"Second Winter", @"Hoth", @"Heat Wave", @"Apocalypse", @"Sun", @"San Diego"];
     self.selectedIndex = 0;
-    [self sliderChanged:self.tempSlider];
+    [self tempSliderChanged:self.tempSlider];
+    [self windSliderChanged:self.windSlider];
     
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
-- (IBAction)sliderChanged:(UISlider*)sender {
+- (IBAction)tempSliderChanged:(UISlider*)sender {
     self.temperature = sender.value;
+}
+
+-(IBAction)windSliderChanged:(UISlider*)sender {
+    self.wind = sender.value;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -56,8 +63,7 @@
     }
     cell.textLabel.text = self.items[indexPath.row];
     
-    if (indexPath.row ==self.selectedIndex ||
-        [self isGaleForceWindsIndex:indexPath.row]) {
+    if (indexPath.row ==self.selectedIndex) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else {
@@ -69,6 +75,15 @@
 
 - (void) updateSacrifices {
     self.sacrifices = [self sacrificeCountForCurrentSelections];
+}
+
+- (void) updateWind {
+    if ([self galeForceWindsIsSelected]) {
+        self.windSlider.enabled = NO;
+        self.wind = 50;
+    } else {
+        self.windSlider.enabled = YES;
+    }
 }
 
 - (NSInteger) sacrificeCountForCurrentSelections {
@@ -96,9 +111,39 @@
     [self updateSacrificeLabel];
 }
 
+- (NSInteger) calculateWindChillWithTemperature:(NSInteger)temp andWindSpeed:(NSInteger)wind {
+    NSInteger windChill;
+    
+    if (wind < 3) {
+        windChill = temp;
+    } else {
+        // formula according to the The National Weather Service
+        windChill = 35.74f + 0.6215f * temp - 35.75 * pow(wind, 0.16) + 0.4275 * self.temperature * pow(wind, 0.16);
+    }
+    
+    return (NSInteger)windChill;
+}
+
+- (void) setWind:(NSInteger)wind {
+    _wind = wind;
+    [self updateWindLabel];
+    [self updateWindChillLabel];
+    [self updateSacrifices];
+}
+
+- (void) updateWindLabel {
+    self.windLabel.text = [NSString stringWithFormat:@"%li mph", (long)self.wind];
+}
+
+- (void) updateWindChillLabel {
+    NSInteger windChill = [self calculateWindChillWithTemperature:self.temperature andWindSpeed:self.wind];
+    self.windChillLabel.text = [NSString stringWithFormat:@"%li°", (long)windChill];
+}
+
 - (void) setTemperature:(NSInteger)temperature {
     _temperature = temperature;
     [self updateTemperatureLabel];
+    [self updateWindChillLabel];
     [self updateSacrifices];
 }
 
@@ -118,6 +163,7 @@
     
     self.selectedIndex = indexPath.row;
     [self updateSacrifices];
+    [self updateWind];
     [self.tableView reloadData];
 }
 
