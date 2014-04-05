@@ -7,7 +7,6 @@
 //
 
 #import "HBHViewController.h"
-#import <math.h>
 
 @interface HBHViewController ()
 
@@ -117,8 +116,8 @@
     if (wind < 3) {
         windChill = temp;
     } else {
-        // formula according to the The National Weather Service
-        windChill = 35.74f + 0.6215f * temp - 35.75 * pow(wind, 0.16) + 0.4275 * self.temperature * pow(wind, 0.16);
+        // formula according to the The National Weather Service based on skin temperatures and heat transfer rates
+        windChill = 35.74 + 0.6215 * temp - 35.75 * pow(wind, 0.16) + 0.4275 * self.temperature * pow(wind, 0.16);
     }
     
     return (NSInteger)windChill;
