@@ -3,7 +3,7 @@ RIT Weather Control
 
 An iPad app for controlling the weather using Bill Destler's secret wireless control protocol.
 
-![Main Screen](https://harlanhaskins.com/images/weathercontrol.png)
+![Main Screen](https://raw.githubusercontent.com/harlanhaskins/RIT-Weather-Control/master/Weather%20Control/Images.xcassets/LaunchImage.launchimage/launchImage@2x.png)
 
 ---------------------------------------
 # The RIT License (RIT)
